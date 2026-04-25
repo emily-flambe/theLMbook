@@ -1,16 +1,14 @@
-PYTHON ?= python3
 VENV = .venv
-PIP = $(VENV)/bin/pip
+UV = uv
 MARIMO = $(VENV)/bin/marimo
 
 .PHONY: install marimo verify clean
 
 $(VENV)/bin/python:
-	$(PYTHON) -m venv $(VENV)
-	$(PIP) install --upgrade pip
+	$(UV) venv $(VENV)
 
 install: $(VENV)/bin/python
-	$(PIP) install -r requirements.txt
+	$(UV) pip install --python $(VENV)/bin/python -r requirements.txt
 
 marimo:
 	$(MARIMO) edit
